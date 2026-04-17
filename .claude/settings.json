@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "mcp__claude_ai_Hugging_Face__space_search",
+      "WebFetch(domain:www.federalregister.gov)",
+      "WebFetch(domain:www.govinfo.gov)"
+    ]
+  }
+}
