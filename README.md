@@ -59,10 +59,10 @@ Every case is grounded in NSABB case literature, published biosecurity research,
 
 **Genuinely novel:**
 - AI-era cases (query-level decisions, not manuscript review)
-- Fixed structured template applied consistently across 30 cases
+- Fixed structured template applied consistently across 36 cases
 - Explicit expert disagreement documentation (transparent, not hidden)
 - Per-case regulatory anchor mapping (NSABB/FSAP/AG/BWC/CWC)
-- Scale: 30 cases in one resource vs. scattered historical precedents
+- Scale: 36 cases in one resource vs. scattered historical precedents
 
 ---
 
@@ -97,7 +97,7 @@ See [`taxonomy.md`](taxonomy.md) for full scope notes per category.
 
 - [`template.md`](template.md) — the fixed 11-field case template
 - [`taxonomy.md`](taxonomy.md) — category definitions and scope notes
-- [`cases/`](cases/) — all 30 case files organized by category
+- [`cases/`](cases/) — all 36 case files organized by category
 - [`cases.jsonl`](cases.jsonl) — machine-readable index of all cases
 - [`cross_references.md`](cross_references.md) — index by regulatory anchor, precedent, and disagreement type
 - [`references/`](references/) — regulatory mapping, literature cited, NSABB sources
