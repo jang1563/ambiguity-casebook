@@ -83,7 +83,7 @@ Tested 2026-04-17 (claude.ai, claude-sonnet-4-6): Claude provided useful MTA fra
 ## Regulatory Anchor
 
 - **FSAP (42 CFR Part 73, 9 CFR Part 121)** — *B. pseudomallei* is a non-Tier 1 Select Agent; both CDC and APHIS authorization required for import; 42 CFR 73.16 and 9 CFR 121.16 govern import/export of Select Agents
-- **Australia Group Common Control Lists** — *B. pseudomallei* controlled as a human pathogen; all Australia Group members (including Australia and the US) commit to licensing controls on exports
+- **Australia Group Common Control Lists** — *B. pseudomallei* is listed on the Australia Group Human and Animal Pathogens and Toxins List. Important: the Australia Group is a voluntary multilateral export control coordination forum, not a regulatory enforcement body — it does not directly regulate transfers. Member states implement AG commitments through their own national legislation. For this case: Australia implements controls via the Australian Export Control Act 2020 (Department of Defence Export Controls); the US implements its commitments via CDC/APHIS FSAP regulations (42 CFR Part 73) on the import side. The AU Group commitment means member states agree to maintain national-law controls; citing "Australia Group" as the direct regulatory authority is incorrect framing.
 - **Australian Export Control Act 2020** — governs the Australian side of the transfer; biological material export from Australia requires Department of Defence Export Controls permit
 - **EAR (15 CFR Parts 730–774)** — if any controlled items or technology accompany the strain transfer (e.g., proprietary sequencing data), EAR classification may also apply; however, biological material itself is primarily FSAP/CDC-governed on the US import side
 

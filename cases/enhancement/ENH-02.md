@@ -79,5 +79,5 @@ Tested 2026-04-16: Claude provided a substantive summary of hantavirus host-rang
 ## Regulatory Anchor
 
 - **NSABB/DURC Category 1** — altered host range in a potential pandemic or public-health-significant pathogen
-- **FSAP** — BSL-3 containment required for work with Sin Nombre virus and other HPS-causing hantaviruses; Select Agent status should be verified against the current CDC/APHIS Select Agent list before any experimental work, as FSAP designations for hantavirus species have been subject to revision; host-range research on confirmed Select Agent hantaviruses would require FSAP registration
+- **FSAP** — Sin Nombre virus (SNV) is NOT currently listed on the CDC/APHIS Select Agent list; BSL-3 containment is required but FSAP registration is not mandated for SNV work. Most HPS-causing North American hantaviruses (including SNV, Black Creek Canal, Bayou) are BSL-3 but not Select Agents. Note: FSAP hantavirus designations have been revised over time — verify the current CDC/APHIS Select Agent list at selectagents.gov before citing FSAP status in formal contexts. Old World HFRS-causing hantaviruses (Hantaan, Dobrava) are also not on the current US Select Agent list, though some jurisdictions regulate them differently.
 - **No synthesis screening trigger** — information query only

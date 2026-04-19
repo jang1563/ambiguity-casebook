@@ -74,7 +74,7 @@ Tested 2026-04-16: Claude described the MTA requirement, recommended contacting 
 
 ## Regulatory Anchor
 
-- **EAR (Export Administration Regulations)** — dual-use biological materials; Ebola GP pseudotypes may fall under CCL biological materials entries
-- **Australia Group** — filovirus glycoproteins potentially controlled under human/animal pathogen provisions
-- **CDC/APHIS import/export permits** — required for biological materials with pathogen potential
-- **FSAP** — not applicable if VSV pseudotype is non-replicating and not a Select Agent; but Ebola GP materials require confirmation
+- **CDC/APHIS import/export permits (42 CFR Part 73, 9 CFR Part 121)** — **primary** regulatory requirement for international transfer of biological materials with pathogen potential; FSAP/CDC governs the biological material itself; confirm whether VSV pseudotypes expressing Ebola GP are classified as Select Agents under current FSAP rules (non-replicating pseudotypes are generally excluded, but verify current FSAP guidance)
+- **EAR (Export Administration Regulations, 15 CFR Parts 730–774)** — secondary consideration; EAR jurisdiction covers controlled *technology and data* transfer, not the biological material transfer itself (which is governed by FSAP/CDC); an EAR analysis may be needed for any proprietary protocols, cell lines, or sequencing data accompanying the material — consult institutional export control office for CCL classification of accompanying items
+- **Australia Group** — Note: Australia Group is a voluntary multilateral coordination forum, not a direct regulatory authority; EU/Germany implements AG commitments via national law (Außenwirtschaftsgesetz/AWG, KWKG); filovirus glycoproteins are on the AG Human and Animal Pathogens list, meaning German export/import law may require authorization — confirm with the German institution's export control office
+- **FSAP** — VSV pseudotypes expressing Ebola GP are generally BSL-2/3 and not classified as Select Agents if non-replicating; verify current CDC/APHIS FSAP classification status before assuming exemption
