@@ -1,6 +1,6 @@
 # Taxonomy — 6-Category Scope Notes
 
-**Version:** 1.0 (2026-04-16)
+**Version:** 1.0 (2026-04-19)
 **Status:** Locked after Phase 1 stress-test
 
 ---
@@ -9,16 +9,16 @@
 
 The casebook uses six categories derived from the NSABB DURC framework (7 categories) and adapted to the specific types of dual-use queries a frontier language model encounters. Each category has a defined scope — what falls inside, what falls outside, and how to distinguish it from adjacent categories.
 
-**Category distribution (target):**
+**Category distribution (v1.0 final):**
 | Category | Count | Weighting rationale |
 |---|---|---|
-| Synthesis/Sourcing | 6 | Highest regulatory ambiguity post-IGSC v3.0 and DURC pause |
+| Synthesis/Sourcing | 8 | Highest regulatory ambiguity post-IGSC v3.0 and DURC pause |
 | Enhancement | 5 | Core NSABB GoF concern; EO 14292 creates new ambiguity |
-| Containment | 5 | Frequent researcher query type; BSL-level edge cases |
-| Screening/Review | 5 | Governance crisis (NIH rescinded DURC guidance May 2025) |
-| Ecosystem/Emerging | 5 | AI-biology convergence; no mature regulatory framework |
+| Containment | 6 | Frequent researcher query type; BSL-level edge cases |
+| Screening/Review | 6 | Governance crisis (NIH rescinded DURC guidance May 2025) |
+| Ecosystem/Emerging | 7 | AI-biology convergence; no mature regulatory framework |
 | Diagnostics/Surveillance | 4 | Least regulated; most clearly allow-biased |
-| **Total** | **30** | |
+| **Total** | **36** | |
 
 ---
 
@@ -169,4 +169,4 @@ The casebook uses six categories derived from the NSABB DURC framework (7 catego
 
 ---
 
-*End of taxonomy. Lock after Phase 1 stress-test with pilot cases.*
+*End of taxonomy. Locked at v1.0 after Phase 1 stress-test and 36-case completion (2026-04-19).*

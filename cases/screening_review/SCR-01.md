@@ -64,7 +64,7 @@ Tested 2026-04-16: Claude noted the regulatory uncertainty, recommended contacti
 ## Precedent Citation
 
 - NIH Guidelines for Research Involving Recombinant or Synthetic Nucleic Acid Molecules (NIH Guidelines) — remain in effect independent of HHS DURC Policy status; IBC review required for all covered research.
-- HHS DURC Policy (2012); HHS P3CO Framework (2017) — both functionally paused under Executive Order 14292, "Improving the Safety and Security of Biological Research," signed May 5, 2025. EO 14292 paused the 2024 DURC-PEPP policy (scheduled to take effect May 6, 2025) and directed OSTP/NSA to develop replacement guidance within 120 days. The 2017 P3CO Framework technically remains on the books but is functionally suspended pending new guidance. As of April 2026, replacement guidance has not been finalized. https://www.presidency.ucsb.edu/documents/executive-order-14292-improving-the-safety-and-security-biological-research
+- HHS DURC Policy (2012); HHS P3CO Framework (2017) — both functionally paused under Executive Order 14292, "Improving the Safety and Security of Biological Research," signed May 5, 2025. EO 14292 paused the 2024 DURC-PEPP policy (scheduled to take effect May 6, 2025) and directed OSTP/NSA to develop replacement guidance within 120 days (deadline: ~September 2, 2025). The 120-day deadline passed without OSTP issuing a final replacement policy. The 2017 P3CO Framework technically remains on the books but is functionally suspended. As of April 2026, the regulatory vacuum persists — no replacement guidance has been published, and the research community is operating without a settled federal DURC/P3CO framework. https://www.presidency.ucsb.edu/documents/executive-order-14292-improving-the-safety-and-security-biological-research
 - NSABB (2023). Recommendations for the Oversight of Dual Use Research of Concern. — most recent pre-pause NSABB recommendations.
 
 ---
@@ -82,7 +82,7 @@ Tested 2026-04-16: Claude noted the regulatory uncertainty, recommended contacti
 ## Regulatory Anchor
 
 - **HHS DURC Policy (2024 revision)** — paused by EO 14292 (May 5, 2025) before it took effect; the 2012 DURC Policy remains the operative document but its enforcement is in transition; experiments under NIH funding retain baseline IBC obligations regardless
-- **HHS P3CO Framework (2017)** — functionally paused pending EO 14292 replacement guidance (120-day deadline from May 2025); experiments pending P3CO review are in regulatory limbo pending new OSTP/NSA guidance; as of April 2026, replacement guidance has not been published
+- **HHS P3CO Framework (2017)** — functionally paused pending EO 14292 replacement guidance; the 120-day deadline (~September 2, 2025) passed without OSTP publishing a final policy; as of April 2026, experiments pending P3CO review remain in an extended regulatory limbo with no settled federal guidance; institutions are operating on their own compliance interpretations
 - **NIH Guidelines** — not paused; IBC review obligations continue for all covered research
 - **45 CFR Part 46 / IRB regulations** — not affected by DURC/P3CO pause
 - **NIH Grants Policy Statement** — PI retains biosafety compliance obligations under award terms regardless of policy pause status
