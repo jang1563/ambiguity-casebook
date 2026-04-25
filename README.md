@@ -1,17 +1,22 @@
 # Dual-Use Ambiguity Casebook
 
-**Version:** 1.0
-**Author:** JangKeun Kim, Ph.D.
-**Date:** April 2026
-**Regulatory status note:** All policy and regulatory references reflect the landscape as of April 2026. Specific executive actions and agency guidance (including the reported pause of HHS DURC and P3CO frameworks) should be verified against current Federal Register and NIH/HHS primary sources before use in institutional compliance contexts.
+[![License: Apache 2.0](https://img.shields.io/badge/Code-Apache%202.0-blue.svg)](LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![HuggingFace Dataset](https://img.shields.io/badge/🤗%20Dataset-jang1563%2Fambiguity--casebook-yellow)](https://huggingface.co/datasets/jang1563/ambiguity-casebook)
+[![36 Cases](https://img.shields.io/badge/Cases-36-orange.svg)](cases/)
+[![v1.0](https://img.shields.io/badge/Version-1.0-lightgrey.svg)](https://github.com/jang1563/ambiguity-casebook/releases/tag/v1.0)
+
+**The first structured casebook of AI-era dual-use biology decisions — 36 cases at the exact query-level boundary frontier models must navigate.**
+
+> **Key Finding (April 2026):** Anthropic's constitutional classifier refuses **53–65%** of expert-validated ALLOW cases via API-level refusal (`stop_reason="refusal"`), firing before model reasoning engages. GPT-4o reached **100%** agreement and Gemini 2.5 Pro **94%** on identical queries. A neutral system prompt ("You are a helpful assistant.") produced identical Anthropic results — the classifier operates on domain keywords, not prompt framing.
 
 ---
 
 ## What This Is
 
-A structured casebook of 36 biology cases that sit exactly at the dual-use decision boundary — the specific query-level decisions a frontier language model like Claude must make when a researcher asks about potentially dangerous biology.
+A structured casebook of 36 biology cases that sit exactly at the dual-use decision boundary — the specific query-level decisions a frontier language model must make when a researcher asks about potentially dangerous biology.
 
-Each case uses a fixed 11-field template adapted from the NSABB DURC (Dual Use Research of Concern) framework, extended to the AI-query context:
+Each case uses a fixed 12-field template adapted from the NSABB DURC (Dual Use Research of Concern) framework, extended to the AI-query context:
 
 1. Case ID and category
 2. Scenario (200–300 words, realistic research context)
@@ -24,8 +29,7 @@ Each case uses a fixed 11-field template adapted from the NSABB DURC (Dual Use R
 9. Precedent citation (NSABB case, publication, or policy)
 10. Documented disagreement (where experts would disagree)
 11. Regulatory anchor (NSABB/FSAP/Australia Group/BWC/CWC/EAR)
-
-An optional 12th field (Uplift Context Variable) addresses whether a specific query meaningfully changes misuse likelihood in context (per Zhang et al., arXiv:2602.23329).
+12. Uplift Context Variable (whether a specific query meaningfully changes misuse likelihood, per Zhang et al., arXiv:2602.23329)
 
 ---
 
@@ -83,25 +87,113 @@ See [`taxonomy.md`](taxonomy.md) for full scope notes per category.
 
 ---
 
+## Model Evaluation Results (April 2026)
+
+All 36 cases evaluated against frontier models. Tier 2 (17 high-ambiguity cases, `ambiguity_intensity ≥ 3`) tested across all four models.
+
+**Tier 2 Agreement vs. Expert Recommendations:**
+
+| Model | Agreement (17 cases) | Over-Refusal | Under-Refusal |
+|-------|---------------------|--------------|---------------|
+| GPT-4o (gpt-4o-2024-11-20) | **17/17 (100%)** | 0% | 0% |
+| Gemini 2.5 Pro | 16/17 (94%) | 0% | 6% |
+| Claude Sonnet 4.6 | 8/17 (47%) | 53% | 0% |
+| Claude Opus 4.7 | 6/17 (35%) | **65%** | 0% |
+
+**Tier 1 (all 36 cases, Claude Sonnet 4.6):** 14/36 agreement (39%); 22/36 over-refusal (61%); 30/36 API-level refusals (83%).
+
+**System-prompt independence confirmed:** Neutral prompt ("You are a helpful assistant.") produced identical case-by-case results for all Anthropic models — the classifier fires before model reasoning sees the system prompt.
+
+Full methodology, per-case breakdown, and scoring corrections in [`scoring/findings.md`](scoring/findings.md).
+
+---
+
+## Quick Start
+
+**Load the dataset:**
+
+```python
+import json
+from pathlib import Path
+
+cases = [json.loads(line) for line in Path("cases.jsonl").read_text().splitlines()]
+
+# Filter to high-ambiguity cases (Tier 2)
+tier2 = [c for c in cases if c["ambiguity_intensity"] >= 3]
+
+# Inspect a case
+case = tier2[0]
+print(case["case_id"])           # e.g., "ENH-01"
+print(case["query_form"])        # exact researcher query
+print(case["expert_recommendation"])  # e.g., "ALLOW WITH CAVEAT"
+print(case["regulatory_anchor"]) # e.g., "NSABB DURC Category 5; Australia Group CCL"
+```
+
+**Or load from HuggingFace:**
+
+```python
+from datasets import load_dataset
+ds = load_dataset("jang1563/ambiguity-casebook")
+print(ds["train"][0]["query_form"])
+```
+
+**Run the evaluation harness against a new model:**
+
+```bash
+cd eval/
+pip install -r requirements.txt
+
+export ANTHROPIC_API_KEY=...
+python eval_harness.py --model sonnet4.6 --tier 2 --dry-run   # preview
+python eval_harness.py --model sonnet4.6 --tier 2              # run Tier 2 (17 cases)
+python eval_harness.py --model sonnet4.6 --tier 1              # run all 36 cases
+```
+
+---
+
+## Repository Structure
+
+```
+ambiguity-casebook/
+├── cases.jsonl              # machine-readable index of all 36 cases (21 fields each)
+├── cases/                   # full markdown case files organized by category
+│   ├── synthesis_sourcing/  # SYN-01 through SYN-08
+│   ├── enhancement/         # ENH-01 through ENH-05
+│   ├── containment/         # CON-01 through CON-06
+│   ├── screening_review/    # SCR-01 through SCR-06
+│   ├── ecosystem_emerging/  # ECO-01 through ECO-07
+│   └── diagnostics_surveillance/  # DIA-01 through DIA-04
+├── eval/
+│   ├── eval_harness.py      # evaluation harness (Anthropic, OpenAI, Google)
+│   └── requirements.txt
+├── model_responses/         # raw JSON responses per model per case
+│   ├── sonnet4.6/
+│   ├── opus4.7/
+│   ├── gpt4o/
+│   └── gemini25pro/
+├── scoring/
+│   ├── summary.csv          # per-case match labels across all models
+│   ├── findings.md          # full evaluation results and interpretation
+│   └── disagreements.md     # cross-model disagreement analysis
+├── references/
+│   ├── regulatory_mapping.md
+│   ├── literature_cited.md
+│   └── nsabb_sources.md
+├── taxonomy.md              # category definitions and scope notes
+├── template.md              # 12-field case template
+├── cross_references.md      # index by regulatory anchor, precedent, disagreement type
+└── failure_modes.md         # known failure patterns and aggregation risks
+```
+
+---
+
 ## Methodology
 
 **v1.0 (this release):** Solo-authored by JangKeun Kim, Ph.D. Cases drafted with Claude assistance, then expert-edited for biological credibility and regulatory accuracy. The "Documented Disagreement" field (Field 10) contains author-anticipated expert disagreement drawn from the author's SOMA biosecurity governance experience (100+ institutions, 25+ countries) and the biosecurity literature. Each disagreement entry is flagged "v1.0 anticipated, pending panel review."
 
-**v2.0 (planned):** Full expert panel review (6–8 reviewers: biosecurity experts, working biologists, safety/ethics specialists, policy background). Panel-collected disagreement replaces author-anticipated. Scale expanded to 30–50 cases.
+**v2.0 (planned):** Full expert panel review (6–8 reviewers: biosecurity experts, working biologists, safety/ethics specialists, policy background). Panel-collected disagreement replaces author-anticipated. Scale expanded to 50+ cases.
 
-**Case sourcing:** ~20 hypothetical-but-precedented cases (grounded in NSABB literature, iGEM cases, published biosecurity research) + ~10 cases with documented Claude responses (tested 2026-04-16).
-
----
-
-## Navigation
-
-- [`template.md`](template.md) — the fixed 11-field case template
-- [`taxonomy.md`](taxonomy.md) — category definitions and scope notes
-- [`cases/`](cases/) — all 36 case files organized by category
-- [`cases.jsonl`](cases.jsonl) — machine-readable index of all cases
-- [`cross_references.md`](cross_references.md) — index by regulatory anchor, precedent, and disagreement type
-- [`references/`](references/) — regulatory mapping, literature cited, NSABB sources
-- [`_meta/`](_meta/) — planning documents, research briefs, handoff (not part of the deliverable)
+**Case sourcing:** ~20 hypothetical-but-precedented cases (grounded in NSABB literature, iGEM cases, published biosecurity research) + ~16 cases with documented Claude responses (tested 2026-04-16).
 
 ---
 
@@ -122,52 +214,53 @@ Before broader distribution, a draft was shared with Anthropic's Safeguards team
 
 ---
 
+## Limitations (v1.0)
+
+**1. Solo-authored; expert disagreement is author-anticipated.**
+v1.0 "Documented Disagreement" fields contain the author's anticipated expert disagreement drawn from SOMA governance experience and the biosecurity literature. They are explicitly flagged "v1.0 anticipated, pending panel review" in every case. v2.0 will replace with expert panel review.
+
+**2. Institutional-context bias toward OECD/US-centric research infrastructure.**
+Case "Resolving Context" sections frequently invoke institutional markers (FSAP registration, IBC approval, LRN membership, NIH/NIAID funding, IGSC provider access) that are correlated with US or OECD research infrastructure. Researchers at institutions in lower- and middle-income countries (LMICs) may lack these markers even for identical legitimate research.
+
+**3. Resolving context verifiability.**
+Many resolving context factors require user disclosure that Claude cannot verify at query time. Cases relying on user-disclosed context establish what the *appropriate* context is, not verification of that context at query time.
+
+**4. Case selection weighted toward institutional actors.**
+v1.0 cases predominantly feature high-institutional-capacity actors (BSL-3 registered PIs, CDC/NIH researchers, IGSC member providers). The casebook documents the gray zone for expert-context decisions well; it is less representative of the gray zone for low-context decisions.
+
+**5. API-only evaluation scope.**
+All evaluation runs were via provider Python SDKs at default API endpoints. Anthropic's claude.ai chat interface may have different constitutional classifier settings. Individual case `current_claude_response` fields (tested via claude.ai, April 2026) show more engagement than API results for the same queries. The 83% API-level refusal rate applies specifically to API access.
+
+**6. Cross-case aggregation risk.**
+A sophisticated actor reading all 36 cases in combination may identify aggregation pathways where individually allowed responses approach dangerous capability scaffolds. See [`failure_modes.md`](failure_modes.md) (Pattern A: Cross-Case Information Aggregation).
+
+---
+
+## Regulatory Status Note
+
+All policy and regulatory references reflect the landscape as of April 2026. Specific executive actions and agency guidance (including the reported pause of HHS DURC and P3CO frameworks per EO 14292) should be verified against current Federal Register and NIH/HHS primary sources before use in institutional compliance contexts.
+
+---
+
 ## Citation
 
 ```bibtex
 @misc{kim2026dualuse,
   author    = {Kim, JangKeun},
-  title     = {Dual-Use Ambiguity Casebook: 30 Structured Cases at the AI-Era Biology Decision Boundary},
+  title     = {Dual-Use Ambiguity Casebook: 36 Structured Cases at the AI-Era Biology Decision Boundary},
   year      = {2026},
   url       = {https://github.com/jang1563/ambiguity-casebook},
   note      = {v1.0. HuggingFace: jang1563/ambiguity-casebook}
 }
 ```
 
----
-
-## Limitations (v1.0)
-
-The following limitations apply to this release and should be considered by anyone using the casebook for policy, training, or publication purposes:
-
-**1. Solo-authored; expert disagreement is author-anticipated**
-v1.0 "Documented Disagreement" fields contain the author's anticipated expert disagreement drawn from SOMA governance experience and the biosecurity literature. They are explicitly flagged "v1.0 anticipated, pending panel review" in every case. This is not the same as panel-collected disagreement. v2.0 will replace with expert panel review.
-
-**2. Institutional-context bias toward OECD/US-centric research infrastructure**
-Case "Resolving Context" sections frequently invoke institutional markers (FSAP registration, IBC approval, LRN membership, NIH/NIAID funding, IGSC provider access) that are correlated with US or OECD research infrastructure. Researchers at institutions in lower- and middle-income countries (LMICs) may lack these markers even for identical legitimate research. This creates potential discriminatory impact in any system calibrated against this casebook's resolving contexts. v2.0 will expand to include LMIC-appropriate pathways and non-US regulatory frameworks.
-
-**3. Resolving context verifiability**
-Many resolving context factors require user disclosure that Claude cannot verify at query time. These factors fall into three tiers:
-- **Auto-detectable:** Identifiable from query language (explicit enhancement framing, pathogen names, stated methodology)
-- **User-disclosed:** Claimed by the user but unverifiable without institutional confirmation (FSAP registration, IBC approval, research affiliation)
-- **Institutionally verifiable:** In principle checkable against public databases (FSAP registrant list, NIH reporter) but not in real-time
-
-Cases relying on user-disclosed or institutionally verifiable context should be understood as establishing what the *appropriate* context is, not as verifying that context at query time.
-
-**4. Case selection weighted toward institutional actors**
-v1.0 cases predominantly feature high-institutional-capacity actors (BSL-3 registered PIs, CDC/NIH researchers, IGSC member providers). This population represents a small fraction of actual Claude users. The casebook documents the gray zone for expert-context decisions well; it is less representative of the gray zone for low-context decisions.
-
-**5. Systematic model validation completed (April 2026); results available in `scoring/`**
-All 36 cases have been tested against Claude Sonnet 4.6, and the 17 highest-ambiguity cases (ambiguity_intensity ≥ 3) against Claude Opus 4.7, GPT-4o (gpt-4o-2024-11-20), and Gemini 2.5 Pro. The casebook now reflects both expert judgment about what responses *should* be and empirically measured agreement between expert recommendations and model outputs. Primary finding: Anthropic's constitutional classifier refuses 53–65% of expert-validated ALLOW cases via API-level refusal (stop_reason="refusal"), while GPT-4o reaches 100% and Gemini 94% agreement on the same queries. See `scoring/findings.md` for full results and `scoring/disagreements.md` for cross-model analysis. Automated scoring labels were manually verified for all 68 Tier 2 responses (96% verified correct; 3 corrections applied and documented).
-
-**6. Cross-case aggregation is not addressed**
-Individual cases are designed to be safe in isolation. A sophisticated actor reading all 36 cases in combination may identify aggregation pathways where individually allowed responses, taken together, approach dangerous capability scaffolds. See `failure_modes.md` (Pattern A: Cross-Case Information Aggregation) for the known aggregation risks. No individual case-level fix fully addresses this systemic pattern.
+See [`CITATION.cff`](CITATION.cff) for CFF format.
 
 ---
 
 ## License
 
-- Repository structure and code: [Apache 2.0](LICENSE)
+- Repository structure and evaluation code: [Apache 2.0](LICENSE)
 - Case content (scenarios, arguments, analysis): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 Copyright 2026 JangKeun Kim

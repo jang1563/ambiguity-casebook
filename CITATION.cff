@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this casebook in your research, please cite it as below."
+type: dataset
+title: "Dual-Use Ambiguity Casebook: 36 Structured Cases at the AI-Era Biology Decision Boundary"
+abstract: >
+  A structured casebook of 36 biology cases at the dual-use decision boundary,
+  covering query-level decisions a frontier language model must make when a
+  researcher asks about potentially dangerous biology. Each case uses a fixed
+  12-field template adapted from the NSABB DURC framework, extended to the
+  AI-query context. Includes systematic multi-model evaluation results
+  (Claude Sonnet 4.6, Claude Opus 4.7, GPT-4o, Gemini 2.5 Pro).
+authors:
+  - family-names: Kim
+    given-names: JangKeun
+    orcid: "https://orcid.org/0000-0002-8733-9925"
+version: "1.0"
+date-released: "2026-04-19"
+license:
+  - Apache-2.0
+  - CC-BY-4.0
+repository-code: "https://github.com/jang1563/ambiguity-casebook"
+url: "https://huggingface.co/datasets/jang1563/ambiguity-casebook"
+keywords:
+  - biosecurity
+  - dual-use research of concern
+  - AI safety
+  - large language models
+  - model evaluation
+  - NSABB
+  - biology
+  - policy
