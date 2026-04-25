@@ -89,23 +89,24 @@ from pathlib import Path
 cases = [json.loads(line) for line in Path("cases.jsonl").read_text().splitlines()]
 
 # Filter to high-ambiguity Tier 2 cases
-tier2 = [c for c in cases if c["ambiguity_intensity"] >= 3]
+tier2 = [c for c in cases if c["ambiguity_intensity"] >= 3]  # 17 cases
 
-# Expert recommendation distribution
+# Expert recommendation distribution (top values)
 from collections import Counter
-print(Counter(c["expert_recommendation"] for c in cases))
-# Counter({'ALLOW WITH CAVEAT': 17, 'ALLOW WITH SIGNIFICANT CAVEAT': 9,
-#          'REFUSE': 6, 'ALLOW': 4})
+recs = Counter(c["expert_recommendation"] for c in cases)
+print(recs.most_common(4))
+# [('ALLOW', 14), ('ALLOW WITH CAVEAT', 9), ('ALLOW WITH SIGNIFICANT CAVEAT', 3), ...]
+# (plus 9 more specific variants across 10 cases — see cases.jsonl for full list)
 ```
 
 ```python
-# Reproduce the over-refusal finding
-over_refusals = [
-    c for c in cases
-    if c.get("sonnet46_label") == "REFUSE"
-    and "ALLOW" in c.get("expert_recommendation", "")
-]
-print(f"Over-refusals: {len(over_refusals)}/36")
+# Reproduce the over-refusal finding from scoring/summary.csv
+import csv
+with open("scoring/summary.csv") as f:
+    rows = list(csv.DictReader(f))
+
+sonnet_over = [r for r in rows if r["model"] == "sonnet4.6" and r["over_refusal"] == "true"]
+print(f"Sonnet 4.6 over-refusals: {len(sonnet_over)}/36")  # 22
 ```
 
 ---
@@ -133,6 +134,9 @@ Each record in `cases.jsonl` contains 21 fields:
 | `severity_rating` | int | Case severity (1–4 scale) |
 | `ambiguity_intensity` | int | Query-level ambiguity (1–4 scale) |
 | `expert_confidence` | int | Confidence in recommendation (1–3 scale) |
+| `regulatory_precedent_strength` | int | Strength of regulatory precedent (1–5 scale) |
+| `model_coverage` | list[string] | Models evaluated on this case (e.g., ["sonnet4.6", "gpt4o"]) |
+| `uplift_context_variable` | string | Whether the query changes misuse likelihood in context (Zhang et al., arXiv:2602.23329) |
 | `file_path` | string | Path to full markdown case file in GitHub repo |
 
 ---

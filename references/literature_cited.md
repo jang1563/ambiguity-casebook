@@ -73,7 +73,7 @@ All primary sources cited across the 30 cases. Organized by section.
 
 ## AI Safety and Benchmark Literature (Background)
 
-- Zhang, Y., et al. (2025). LLM novice uplift in biological research. arXiv:2602.23329.
+- Zhang, Y., et al. (2026). LLM novice uplift in biological research. arXiv:2602.23329.
 - Noever, D., & McKee, M. (2025). Dual-use AI challenge benchmark. arXiv:2502.06867.
 - Weidinger, L., et al. (2024). LAB-Bench: Measuring scientific research capabilities of language models. arXiv:2407.10362. [FutureHouse]
 - Mazeika, M., et al. (2024). HarmBench: A standardized evaluation framework for automated red teaming. arXiv:2402.04249.
