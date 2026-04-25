@@ -1,6 +1,6 @@
 # Literature Cited
 
-All primary sources cited across the 30 cases. Organized by section.
+All primary sources cited across the 36 cases. Organized by section.
 
 ---
 

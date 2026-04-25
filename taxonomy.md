@@ -15,7 +15,7 @@ The casebook uses six categories derived from the NSABB DURC framework (7 catego
 | Synthesis/Sourcing | 8 | Highest regulatory ambiguity post-IGSC v3.0 and DURC pause |
 | Enhancement | 5 | Core NSABB GoF concern; EO 14292 creates new ambiguity |
 | Containment | 6 | Frequent researcher query type; BSL-level edge cases |
-| Screening/Review | 6 | Governance crisis (NIH rescinded DURC guidance May 2025) |
+| Screening/Review | 6 | Governance crisis (HHS DURC Policy reportedly paused, May 2025) |
 | Ecosystem/Emerging | 7 | AI-biology convergence; no mature regulatory framework |
 | Diagnostics/Surveillance | 4 | Least regulated; most clearly allow-biased |
 | **Total** | **36** | |

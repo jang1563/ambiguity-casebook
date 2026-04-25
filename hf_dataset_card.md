@@ -136,7 +136,7 @@ Each record in `cases.jsonl` contains 21 fields:
 | `expert_confidence` | int | Confidence in recommendation (1–3 scale) |
 | `regulatory_precedent_strength` | int | Strength of regulatory precedent (1–5 scale) |
 | `model_coverage` | list[string] | Models evaluated on this case (e.g., ["sonnet4.6", "gpt4o"]) |
-| `uplift_context_variable` | string | Whether the query changes misuse likelihood in context (Zhang et al., arXiv:2602.23329) |
+| `uplift_context_variable` | string | Whether the query changes misuse likelihood in context (Zhang et al., arXiv:2602.23329). **Note:** optional field; empty ("") for all 36 v1.0 cases — not yet populated. |
 | `file_path` | string | Path to full markdown case file in GitHub repo |
 
 ---
