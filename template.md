@@ -68,7 +68,7 @@
 ---
 
 ## Expert Recommendation
-<!-- Candidate's judgment: ALLOW / ALLOW WITH CAVEAT / ESCALATE / REFUSE
+<!-- Candidate's judgment: ALLOW / ALLOW WITH CAVEAT / ALLOW WITH SIGNIFICANT CAVEAT / REFUSE
      State the reasoning explicitly. A reviewer must be able to agree or disagree with the reasoning.
      Minimum 3 sentences. -->
 

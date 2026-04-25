@@ -78,7 +78,7 @@ case = ds["train"][0]
 print(case["case_id"])              # "ENH-01"
 print(case["query_form"])           # exact researcher query
 print(case["expert_recommendation"]) # "ALLOW WITH CAVEAT"
-print(case["regulatory_anchor"])    # "NSABB DURC Category 5; Australia Group CCL"
+print(case["regulatory_anchor"])    # "NSABB/DURC Category 1 — enhanced transmissibility..."
 ```
 
 ```python

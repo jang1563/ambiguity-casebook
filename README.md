@@ -126,7 +126,7 @@ case = tier2[0]
 print(case["case_id"])           # e.g., "ENH-01"
 print(case["query_form"])        # exact researcher query
 print(case["expert_recommendation"])  # e.g., "ALLOW WITH CAVEAT"
-print(case["regulatory_anchor"]) # e.g., "NSABB DURC Category 5; Australia Group CCL"
+print(case["regulatory_anchor"]) # e.g., "NSABB/DURC Category 1 — enhanced transmissibility..."
 ```
 
 **Or load from HuggingFace:**
@@ -148,6 +148,27 @@ python eval_harness.py --model sonnet4.6 --tier 2 --dry-run   # preview
 python eval_harness.py --model sonnet4.6 --tier 2              # run Tier 2 (17 cases)
 python eval_harness.py --model sonnet4.6 --tier 1              # run all 36 cases
 ```
+
+---
+
+## Navigation
+
+**Core dataset:**
+[`cases.jsonl`](cases.jsonl) — machine-readable index (21 fields, 36 cases) ·
+[`cases/`](cases/) — full markdown case files by category ·
+[`template.md`](template.md) — 12-field case template ·
+[`taxonomy.md`](taxonomy.md) — category definitions and scope
+
+**Evaluation:**
+[`eval/eval_harness.py`](eval/eval_harness.py) — multi-model evaluation harness ·
+[`scoring/findings.md`](scoring/findings.md) — full results and interpretation ·
+[`scoring/disagreements.md`](scoring/disagreements.md) — cross-model disagreement analysis ·
+[`scoring/summary.csv`](scoring/summary.csv) — per-case match labels
+
+**Reference:**
+[`cross_references.md`](cross_references.md) — index by regulatory anchor, precedent, disagreement type ·
+[`failure_modes.md`](failure_modes.md) — known failure patterns and aggregation risks ·
+[`references/`](references/) — regulatory mapping, literature cited, NSABB sources
 
 ---
 

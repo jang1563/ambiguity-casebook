@@ -545,13 +545,14 @@ def main():
 
     config = MODEL_CONFIGS[args.model]
 
-    if not args.dry_run and not args.aggregate:
+    if not args.dry_run and not args.aggregate and not args.score_only:
         if config["provider"] == "anthropic" and not os.environ.get("ANTHROPIC_API_KEY"):
             print("ERROR: ANTHROPIC_API_KEY not set", file=sys.stderr); sys.exit(1)
         if config["provider"] == "openai" and not os.environ.get("OPENAI_API_KEY"):
             print("ERROR: OPENAI_API_KEY not set", file=sys.stderr); sys.exit(1)
         if config["provider"] == "google" and not (os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")):
             print("ERROR: GOOGLE_API_KEY not set", file=sys.stderr); sys.exit(1)
+    if not args.dry_run and not args.aggregate:
         if not os.environ.get("ANTHROPIC_API_KEY"):
             print("ERROR: ANTHROPIC_API_KEY required for scoring pass", file=sys.stderr); sys.exit(1)
 
@@ -569,6 +570,42 @@ def main():
             print(f"  All cases: 100% cross-run agreement")
         write_replication_csv({args.model: records})
         write_full_summary_csv()
+        return
+
+    if args.score_only:
+        # Re-run scoring pass on ALL existing responses; respects primary_label_manual_override.
+        # Unlike --rescore (heuristic-only), this rescores every response regardless of how
+        # the original label was assigned. Use after fixing the scoring pass.
+        json_paths = sorted(output_dir.glob("*.json"))
+        print(f"Model: {args.model} ({config['model_id']}) — SCORE-ONLY MODE")
+        print(f"Rescoring {len(json_paths)} existing response files...")
+        all_results = []
+        rescored = 0
+        for json_path in json_paths:
+            existing = json.loads(json_path.read_text())
+            if existing["full_response"] in ("[API_REFUSAL]", "[DRY RUN — no API call made]"):
+                all_results.append(existing)
+                continue
+            print(f"  RESCORE {existing['case_id']}...", end=" ", flush=True)
+            time.sleep(0.3)
+            auto_label, auto_justification = score_response(existing["full_response"])
+            existing["primary_label_auto"] = auto_label
+            existing["primary_label_auto_justification"] = auto_justification
+            if not existing.get("primary_label_manual_override"):
+                existing["primary_label"] = auto_label
+                existing["match_category"] = compute_match_category(
+                    auto_label, existing["expert_recommendation_normalized"])
+                existing["over_refusal"] = existing["match_category"] == "OVER_REFUSAL"
+                existing["under_refusal"] = existing["match_category"] == "UNDER_REFUSAL"
+            json_path.write_text(json.dumps(existing, indent=2, ensure_ascii=False))
+            icon = {"EXACT_MATCH": "✓", "DIRECTIONAL_MATCH": "~",
+                    "OVER_REFUSAL": "↑", "UNDER_REFUSAL": "↓"}.get(existing["match_category"], "?")
+            print(f"{auto_label} → {icon} {existing['match_category']}")
+            rescored += 1
+            all_results.append(existing)
+        print(f"\nRescored {rescored} files.")
+        write_summary_csv(all_results)
+        print_summary(all_results)
         return
 
     if args.rescore:
