@@ -6,15 +6,15 @@
 [![36 Cases](https://img.shields.io/badge/Cases-36-orange.svg)](cases/)
 [![v1.0](https://img.shields.io/badge/Version-1.0-lightgrey.svg)](https://github.com/jang1563/ambiguity-casebook/releases/tag/v1.0)
 
-**The first structured casebook of AI-era dual-use biology decisions — 36 cases at the exact query-level boundary frontier models must navigate.**
+**The first structured casebook of AI-era dual-use biology decisions: 36 cases at the exact query-level boundary frontier models must navigate.**
 
-> **Key Finding (April 2026):** Anthropic's constitutional classifier refuses **53–65%** of expert-validated ALLOW cases via API-level refusal (`stop_reason="refusal"`), firing before model reasoning engages. GPT-4o reached **100%** agreement and Gemini 2.5 Pro **94%** on identical queries. A neutral system prompt ("You are a helpful assistant.") produced identical Anthropic results — the classifier operates on domain keywords, not prompt framing.
+> **Key Finding (April 2026):** Anthropic's constitutional classifier refuses **53–65%** of expert-validated ALLOW cases via API-level refusal (`stop_reason="refusal"`), firing before model reasoning engages. GPT-4o reached **100%** agreement and Gemini 2.5 Pro **94%** on identical queries. A neutral system prompt ("You are a helpful assistant.") produced identical Anthropic results: the classifier operates on domain keywords, not prompt framing.
 
 ---
 
 ## What This Is
 
-A structured casebook of 36 biology cases that sit exactly at the dual-use decision boundary — the specific query-level decisions a frontier language model must make when a researcher asks about potentially dangerous biology.
+A structured casebook of 36 biology cases that sit exactly at the dual-use decision boundary: the specific query-level decisions a frontier language model must make when a researcher asks about potentially dangerous biology.
 
 Each case uses a fixed 12-field template adapted from the NSABB DURC (Dual Use Research of Concern) framework, extended to the AI-query context:
 
@@ -35,7 +35,7 @@ Each case uses a fixed 12-field template adapted from the NSABB DURC (Dual Use R
 
 ## Why This Exists
 
-NSABB's DURC framework is the canonical structure for dual-use biology governance — but it predates large language models. Every published NSABB case addresses manuscript or research-program review, not real-time query-level decisions. There is no AI-era equivalent.
+NSABB's DURC framework is the canonical structure for dual-use biology governance: but it predates large language models. Every published NSABB case addresses manuscript or research-program review, not real-time query-level decisions. There is no AI-era equivalent.
 
 Anthropic's Frontier Red Team has spent 150+ hours with biosecurity experts red-teaming Claude, but their methodology is not public. The Safeguards team must make similar judgment calls daily. This casebook makes the structure of those decisions explicit, auditable, and available for training, policy, and research use.
 
@@ -102,7 +102,7 @@ All 36 cases evaluated against frontier models. Tier 2 (17 high-ambiguity cases,
 
 **Tier 1 (all 36 cases, Claude Sonnet 4.6):** 14/36 agreement (39%); 22/36 over-refusal (61%); 30/36 API-level refusals (83%).
 
-**System-prompt independence confirmed:** Neutral prompt ("You are a helpful assistant.") produced identical case-by-case results for all Anthropic models — the classifier fires before model reasoning sees the system prompt.
+**System-prompt independence confirmed:** Neutral prompt ("You are a helpful assistant.") produced identical case-by-case results for all Anthropic models: the classifier fires before model reasoning sees the system prompt.
 
 Full methodology, per-case breakdown, and scoring corrections in [`scoring/findings.md`](scoring/findings.md).
 
@@ -126,7 +126,7 @@ case = tier2[0]
 print(case["case_id"])           # e.g., "ENH-01"
 print(case["query_form"])        # exact researcher query
 print(case["expert_recommendation"])  # e.g., "ALLOW WITH CAVEAT"
-print(case["regulatory_anchor"]) # e.g., "NSABB/DURC Category 1 — enhanced transmissibility..."
+print(case["regulatory_anchor"]) # e.g., "NSABB/DURC Category 1: enhanced transmissibility..."
 ```
 
 **Or load from HuggingFace:**
@@ -154,21 +154,21 @@ python eval_harness.py --model sonnet4.6 --tier 1              # run all 36 case
 ## Navigation
 
 **Core dataset:**
-[`cases.jsonl`](cases.jsonl) — machine-readable index (21 fields, 36 cases) ·
-[`cases/`](cases/) — full markdown case files by category ·
-[`template.md`](template.md) — 12-field case template ·
-[`taxonomy.md`](taxonomy.md) — category definitions and scope
+[`cases.jsonl`](cases.jsonl): machine-readable index (21 fields, 36 cases) ·
+[`cases/`](cases/): full markdown case files by category ·
+[`template.md`](template.md): 12-field case template ·
+[`taxonomy.md`](taxonomy.md): category definitions and scope
 
 **Evaluation:**
-[`eval/eval_harness.py`](eval/eval_harness.py) — multi-model evaluation harness ·
-[`scoring/findings.md`](scoring/findings.md) — full results and interpretation ·
-[`scoring/disagreements.md`](scoring/disagreements.md) — cross-model disagreement analysis ·
-[`scoring/summary.csv`](scoring/summary.csv) — per-case match labels
+[`eval/eval_harness.py`](eval/eval_harness.py): multi-model evaluation harness ·
+[`scoring/findings.md`](scoring/findings.md): full results and interpretation ·
+[`scoring/disagreements.md`](scoring/disagreements.md): cross-model disagreement analysis ·
+[`scoring/summary.csv`](scoring/summary.csv): per-case match labels
 
 **Reference:**
-[`cross_references.md`](cross_references.md) — index by regulatory anchor, precedent, disagreement type ·
-[`failure_modes.md`](failure_modes.md) — known failure patterns and aggregation risks ·
-[`references/`](references/) — regulatory mapping, literature cited, NSABB sources
+[`cross_references.md`](cross_references.md): index by regulatory anchor, precedent, disagreement type ·
+[`failure_modes.md`](failure_modes.md): known failure patterns and aggregation risks ·
+[`references/`](references/): regulatory mapping, literature cited, NSABB sources
 
 ---
 
