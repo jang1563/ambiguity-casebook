@@ -33,14 +33,14 @@ jobs:
         run: |
           python -c "
           import json
-          required_top = ['id', 'category']
+          required_top = ['case_id', 'category', 'title', 'scenario', 'query_form', 'expert_recommendation', 'regulatory_anchor']
           missing = []
           with open('cases.jsonl') as f:
               for line in f:
                   if not line.strip(): continue
                   obj = json.loads(line)
                   for field in required_top:
-                      if field not in obj: missing.append((obj.get('id','?'), field))
+                      if field not in obj: missing.append((obj.get('case_id','?'), field))
           if missing:
               for m in missing: print(f'Missing field {m[1]} in case {m[0]}')
               raise SystemExit(1)
