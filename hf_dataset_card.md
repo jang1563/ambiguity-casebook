@@ -34,9 +34,13 @@ configs:
 
 ---
 
-## Key Finding
+## Reviewer Framing
 
-> Anthropic's constitutional classifier refuses **53–65%** of expert-validated ALLOW cases via API-level refusal (`stop_reason="refusal"`), firing before model reasoning engages. GPT-4o reached **100%** and Gemini 2.5 Pro **94%** agreement on the same queries. A neutral system prompt produced identical Anthropic results — the classifier operates on domain keywords, not prompt framing.
+This is a **decision-boundary corpus**, not a model-comparison benchmark. The dataset is the primary artifact; the v1.0 evaluation below is one example use, included so reviewers can see the casebook in action. Numbers should be read as a slice-level calibration signal, not as a global model-quality ranking or a claim about any provider's full safety system.
+
+## v1.0 Evaluation (April 2026)
+
+All 36 cases were evaluated against four frontier models. Tier 2 (17 high-ambiguity cases, `ambiguity_intensity ≥ 3`) was the primary measurement subset.
 
 | Model | Tier 2 Agreement (17 cases) | Over-Refusal Rate |
 |---|---|---|
@@ -45,7 +49,7 @@ configs:
 | Claude Sonnet 4.6 | 8/17 (47%) | 53% |
 | Claude Opus 4.7 | 6/17 (35%) | **65%** |
 
-Full results: `scoring/findings.md` in the GitHub repo.
+The Anthropic Sonnet/Opus refusals fired at the API layer (`stop_reason="refusal"`) before model reasoning engaged; a neutral system prompt produced identical case-by-case results, indicating the refusal mechanism operated upstream of system-prompt conditioning. Full methodology and per-case scoring corrections are in `scoring/findings.md` in the GitHub repo.
 
 ---
 

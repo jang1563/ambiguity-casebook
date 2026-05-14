@@ -6,9 +6,11 @@
 [![36 Cases](https://img.shields.io/badge/Cases-36-orange.svg)](cases/)
 [![v1.0](https://img.shields.io/badge/Version-1.0-lightgrey.svg)](https://github.com/jang1563/ambiguity-casebook/releases/tag/v1.0)
 
-**The first structured casebook of AI-era dual-use biology decisions: 36 cases at the exact query-level boundary frontier models must navigate.**
+> **TL;DR.** A structured corpus of **36 dual-use biology decisions** at the exact query-level boundary that frontier models must adjudicate, organized under a 12-field NSABB-anchored template. v1.0 also reports a 4-model evaluation (Anthropic Sonnet 4.6 / Opus 4.7, GPT-4o, Gemini 2.5 Pro) against expert recommendations on the 17-case Tier 2 subset. The dataset is the primary artifact; the evaluation is one example use, not the headline.
 
-> **Key Finding (April 2026):** Anthropic's constitutional classifier refuses **53–65%** of expert-validated ALLOW cases via API-level refusal (`stop_reason="refusal"`), firing before model reasoning engages. GPT-4o reached **100%** agreement and Gemini 2.5 Pro **94%** on identical queries. A neutral system prompt ("You are a helpful assistant.") produced identical Anthropic results: the classifier operates on domain keywords, not prompt framing.
+## Reviewer Framing
+
+This is a **decision-boundary corpus**, not a model-comparison benchmark. Each case is a structured artifact a safeguard team can use to: (a) anchor adjudication training, (b) test whether a deployed system distinguishes legitimate context from superficially-dangerous query form, (c) document expert disagreement explicitly rather than collapsing it into a single label. The included 4-model evaluation is one example use of that corpus, included so reviewers can see the casebook in action; it should be read as a slice-level calibration signal, not as a global model-quality ranking or a claim about any provider's full safety system.
 
 ---
 
@@ -102,7 +104,7 @@ All 36 cases evaluated against frontier models. Tier 2 (17 high-ambiguity cases,
 
 **Tier 1 (all 36 cases, Claude Sonnet 4.6):** 14/36 agreement (39%); 22/36 over-refusal (61%); 30/36 API-level refusals (83%).
 
-**System-prompt independence confirmed:** Neutral prompt ("You are a helpful assistant.") produced identical case-by-case results for all Anthropic models: the classifier fires before model reasoning sees the system prompt.
+**System-prompt independence observed:** Neutral prompt ("You are a helpful assistant.") produced identical case-by-case results for all Anthropic models in this run: refusals fired at the API layer before the model could condition on the system prompt. This is a property of the API-level refusal mechanism, not of the constitution or rule set itself.
 
 Full methodology, per-case breakdown, and scoring corrections in [`scoring/findings.md`](scoring/findings.md).
 
@@ -232,6 +234,26 @@ It **does** contain:
 - Regulatory anchors to public frameworks
 
 Before broader distribution, a draft was shared with Anthropic's Safeguards team for responsible-disclosure review. Reviewers were invited to flag any case providing operational uplift beyond public literature.
+
+---
+
+## How This Maps to AI Safety Practice
+
+This corpus complements rather than replaces other safeguard artifacts:
+
+- **Capability evaluations** (e.g. WMDP, biothreat-eval) measure upper-bound risk; this corpus structures the per-query *adjudication* decisions that follow.
+- **Over-refusal calibration** (e.g. [bio-overrefusal-v0.1](https://github.com/jang1563/bio-overrefusal-v0.1)) measures false-positive cost on unambiguous legitimate queries; this corpus sits one tier deeper, in the genuinely ambiguous zone where reasonable experts disagree.
+- **Constitutional / classifier safeguards** (e.g. [constitutional-bioguard](https://github.com/jang1563/constitutional-bioguard)) operate inside the response loop; this corpus is an *external* reference adjudication a safeguard team can train against, evaluate against, or use as a regression set.
+
+A safeguard team using this corpus would: (a) treat the 12-field template as a structured rubric for their own adjudication decisions, (b) compare model outputs to `expert_recommendation` on the Tier 2 subset as a calibration signal, (c) use `documented_disagreement` to identify cases that should route to human review rather than automated decision, (d) extend the case set with their own deployment-relevant scenarios under the same template.
+
+This work is independent and does not represent any provider's internal evaluation pipeline.
+
+---
+
+## Responsible Use Scope
+
+See [`SAFETY.md`](SAFETY.md) for the public responsible-use scope, what is withheld, and how to report concerns.
 
 ---
 
