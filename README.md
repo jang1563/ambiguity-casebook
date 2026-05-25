@@ -8,6 +8,8 @@
 
 > **TL;DR.** A structured corpus of **36 dual-use biology decisions** at the exact query-level boundary that frontier models must adjudicate, organized under a 12-field NSABB-anchored template. v1.0 also reports a 4-model evaluation (Anthropic Sonnet 4.6 / Opus 4.7, GPT-4o, Gemini 2.5 Pro) against expert recommendations on the 17-case Tier 2 subset. The dataset is the primary artifact; the evaluation is one example use, not the headline.
 
+> **Portfolio context.** This 36-case DURC boundary corpus is one component of the *Calibrated Permissioning for Biological AI* framework (Kim, NeurIPS 2026 Position submission). It complements [OverRefusal](https://github.com/jang1563/bio-overrefusal-v0.1) (FPR finding), [ConstitutionRules](https://github.com/jang1563/bio-constitution-rules) (30-rule constitution), and [Constitutional BioGuard](https://github.com/jang1563/constitutional-bioguard) (DeBERTa-v3 prototype).
+
 ## Reviewer Framing
 
 This is a **decision-boundary corpus**, not a model-comparison benchmark. Each case is a structured artifact a safeguard team can use to: (a) anchor adjudication training, (b) test whether a deployed system distinguishes legitimate context from superficially-dangerous query form, (c) document expert disagreement explicitly rather than collapsing it into a single label. The included 4-model evaluation is one example use of that corpus, included so reviewers can see the casebook in action; it should be read as a slice-level calibration signal, not as a global model-quality ranking or a claim about any provider's full safety system.
